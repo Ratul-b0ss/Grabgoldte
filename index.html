@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <title>Grab Gold</title>
+    <link rel="manifest" href="manifest.json" />
+    <meta name="theme-color" content="#0F0F12" />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@4.7.0/fonts/remixicon.css" rel="stylesheet" />
+    <style>
+      /* --- PREMIUM GOLD THEME --- */
+      :root {
+        --bg-color: #0F0F12;
+        --card-bg: #1A1A22;
+        --glass-bg: rgba(26, 26, 34, 0.6);
+        --text-primary: #FFFFFF;
+        --text-secondary: #9CA3AF;
+        --gold-primary: #FFD700;
+        --gold-gradient: linear-gradient(135deg, #FFD700 0%, #FDB931 50%, #C49208 100%);
+        --accent-glow: rgba(255, 215, 0, 0.3);
+        --danger: #EF4444;
+        --success: #10B981;
+        --border-color: rgba(255, 255, 255, 0.08);
+      }
+
+      body {
+        background-color: var(--bg-color);
+        color: var(--text-primary);
+        font-family: 'Inter', system-ui, -apple-system, sans-serif;
+        -webkit-font-smoothing: antialiased;
+        overflow-x: hidden;
+      }
+
+      /* Utilities */
+      .text-gradient-gold {
+        background: var(--gold-gradient);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+      }
+
+      .bg-gradient-gold {
+        background: var(--gold-gradient);
+      }
+
+      .glass-panel {
+        background: var(--glass-bg);
+        backdrop-filter: blur(12px);
+        -webkit-backdrop-filter: blur(12px);
+        border: 1px solid rgba(255, 255, 255, 0.08);
+      }
+
+      .card-premium {
+        background: var(--card-bg);
+        border: 1px solid var(--border-color);
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+        transition: transform 0.2s, border-color 0.2s;
+      }
+      
+      .card-premium:active {
+        transform: scale(0.98);
+      }
+
+      .btn-gold {
+        background: var(--gold-gradient);
+        color: #000;
+        font-weight: 700;
+        box-shadow: 0 4px 15px var(--accent-glow);
+        transition: all 0.3s ease;
+      }
+      .btn-gold:hover {
+        box-shadow: 0 6px 20px rgba(255, 215, 0, 0.5);
+        transform: translateY(-1px);
+      }
+
+      /* Animations */
+      @keyframes float {
+        0% { transform: translateY(0px); }
+        50% { transform: translateY(-5px); }
+        100% { transform: translateY(0px); }
+      }
+      .animate-float {
+        animation: float 4s ease-in-out infinite;
+      }
+
+      @keyframes fade-in-up {
+        from { opacity: 0; transform: translateY(20px); }
+        to { opacity: 1; transform: translateY(0); }
+      }
+      .animate-fade-in {
+        animation: fade-in-up 0.5s ease-out forwards;
+      }
+
+      /* Custom Scrollbar */
+      ::-webkit-scrollbar { width: 0px; background: transparent; }
+      
+      /* Input Styles */
+      .input-premium {
+        background: rgba(255, 255, 255, 0.05);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        color: white;
+        transition: all 0.3s;
+      }
+      .input-premium:focus {
+        border-color: var(--gold-primary);
+        background: rgba(255, 255, 255, 0.1);
+        box-shadow: 0 0 0 2px rgba(255, 215, 0, 0.1);
+      }
+    </style>
+  <script type="importmap">
+{
+  "imports": {
+    "react": "https://esm.sh/react@^19.2.3",
+    "react-dom/": "https://esm.sh/react-dom@^19.2.3/",
+    "react/": "https://esm.sh/react@^19.2.3/",
+    "firebase/": "https://esm.sh/firebase@^12.7.0/",
+    "react-router-dom": "https://esm.sh/react-router-dom@^7.11.0",
+    "vite": "https://esm.sh/vite@^7.3.0",
+    "@vitejs/plugin-react": "https://esm.sh/@vitejs/plugin-react@^5.1.2"
+  }
+}
+</script>
+<link rel="stylesheet" href="/index.css">
+</head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/index.tsx"></script>
+    <script>
+      if ("serviceWorker" in navigator) {
+        window.addEventListener("load", () => {
+          navigator.serviceWorker.register("sw.js").then(
+            (registration) => console.log("SW registered"),
+            (err) => console.log("SW registration failed: ", err)
+          );
+        });
+      }
+
+      window.deferredPrompt = null;
+      window.addEventListener("beforeinstallprompt", (e) => {
+        e.preventDefault();
+        window.deferredPrompt = e;
+      });
+    </script>
+  </body>
+</html>
